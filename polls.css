@@ -1,0 +1,108 @@
+body{
+    background-image: url('./5040007.jpg');
+}
+
+body h1{
+    color: #ffffff;
+    font-size: 4em;
+    margin: 20px;
+}
+
+.poll-body{
+
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 1.5rem;
+    width: 70vw;
+    background-color: rgba(0, 0, 0, 0.6);
+
+}
+
+.poll-title{
+    background-color: #000000;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 1.5rem;
+    padding-left: 20px;
+
+}
+
+.poll-content{
+    background-color: rgba(0, 0, 255, 0.2);
+    color: white;
+    padding: 10px;
+    border-radius: 1.5rem;
+    margin-top: 10px;
+}
+
+.poll-submit-button{
+    height: 40px;
+    width: 120px;
+    border-radius: 1.5rem;
+    background-color: #ff0033 !important;
+    color: white;
+    box-shadow: none !important;
+    border: 2px solid #ffffff;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.poll-content input{
+    margin-right: 1rem;
+}
+
+
+#userDataDiv{
+
+
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    border-radius: 20px;
+    width: 50vw;
+    color: #ffffff;
+    font-size: 30px;
+
+}
+
+.mybuttonClass1{
+    font-size: 20px;
+    margin-bottom: 10px;
+    background-color: #ff0033;
+    border: 2px solid wheat !important;
+    border-radius: 1.5rem;
+    color: #ffffff;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: none;
+
+}
+
+.mybuttonClass{
+
+    font-size: 20px;
+    margin-bottom: 10px;
+    background-color: #ff0033;
+    border: 2px solid wheat !important;
+    border-radius: 1.5rem;
+    color: #ffffff;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+
+
+}
+
+#notLoggedIn{
+
+    font-size: 30px;
+    border-radius: 1.5rem;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+
+
+}
