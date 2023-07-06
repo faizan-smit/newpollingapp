@@ -429,9 +429,10 @@ const handleAuthStateChange = (user) => {
 
     `;
 
+  document.getElementById('createPoll').disabled = true;
+
 
   }
-  document.getElementById('createPoll').disabled = true;
 };
 
 
