@@ -106,3 +106,35 @@ body h1{
 
 
 }
+
+.poll-submit-button-disabled{
+
+    background-color: gray !important;
+
+
+}
+
+#errorButton{
+
+    position: absolute;
+    top: -30000px;
+    left: -30000px;
+
+
+}
+
+#exampleModalLabel1{
+
+
+    color: #ff0033;
+    font-size: 30px !important;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+
+}
+
+.required{
+
+    color: #ff0033;
+
+}

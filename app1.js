@@ -1,7 +1,7 @@
 
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut  } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 
 
   const firebaseConfig = {
@@ -32,14 +32,14 @@
     localStorage.setItem('email', email);
     var successlogin = true;
     // ...
-    alert('Sign in Successful')
+    // alert('Sign in Successful')
     location.href = './polls.html'
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
 
-    alert('Error: Please Sign up')
+    alert('Error: ' + errorMessage)
     location.href = './index.html'
 
   });
@@ -47,22 +47,18 @@
 
   })
 
-  if(successlogin = true){
-
-  function toImp(){
-    var toImport = email;
-      return toImport;
-  }
-  };
 
 
 
 
 
-const handleAuthStateChange = (user) => {
+  const handleAuthStateChange = (user) => {
     if (user) {
       
       console.log('User is logged in:', user.email);
+
+      location.href = `./polls.html`;
+
     } else {
     
       console.log('User is logged out');
@@ -70,4 +66,4 @@ const handleAuthStateChange = (user) => {
   };
   
 
-  firebase.auth().onAuthStateChanged(handleAuthStateChange);
+onAuthStateChanged(auth, handleAuthStateChange);

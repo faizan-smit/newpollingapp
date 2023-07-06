@@ -48,8 +48,15 @@ const displayFunction = ()=> {
     let userPollContent3 = document.getElementById('userPollContent3').value;
     let userPollContent4 = document.getElementById('userPollContent4').value;
 
+    
 
-    try {
+
+    if(userPollTitle.trim().length != 0 && userPollContent1.trim().length != 0 && userPollContent2.trim().length != 0 && userPollContent3.trim().length != 0 && userPollContent4.trim().length != 0) {
+
+
+
+
+      try {
         const docRef = await addDoc(collection(db, "Polls"), {
           pollTitle: userPollTitle,
           pollContent1: userPollContent1,
@@ -61,12 +68,27 @@ const displayFunction = ()=> {
           pollContent4: userPollContent4,
           pollContent4Vote: 0,
           createdAt: serverTimestamp(),
+          voters: ['DummyVoterID', ],
           
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
+
+
+
+
+
+
+    }else{
+
+            // alert("Please fill in all the fields");
+            document.getElementById("errorButton").click();
+
+
+    }
+
 
 
 
@@ -123,9 +145,10 @@ let letMeDisplay = () => {
                     
                     
                     newInfo.innerHTML = `
-                            Signed in as: ${user.email}
+                            Signed in as: <a href="mailto:${user.email}">${user.email}</a>
                     
                     `
+                    console.log("User UID: " + user.uid)
 
                 document.getElementById('SignOut').className = 'mybuttonClass';
                     
@@ -150,6 +173,8 @@ let letMeDisplay = () => {
                     let secondOptionResult = (data.pollContent2Vote*100)/(data.pollContent1Vote + data.pollContent2Vote + data.pollContent3Vote + data.pollContent4Vote);
                     let thirdOptionResult = (data.pollContent3Vote*100)/(data.pollContent1Vote + data.pollContent2Vote + data.pollContent3Vote + data.pollContent4Vote);
                     let fourthOptionResult = (data.pollContent4Vote*100)/(data.pollContent1Vote + data.pollContent2Vote + data.pollContent3Vote + data.pollContent4Vote);
+                    
+
                     
 
 
@@ -208,19 +233,19 @@ let letMeDisplay = () => {
                 
                     let poll_content1 = document.createElement('div');
                     poll_content1.classList.add('poll-content');
-                    let first_text_node = document.createTextNode(data.pollContent1 +  "     "  +  " "  + " "  +  firstOptionResult + "%" );
+                    let first_text_node = document.createTextNode(data.pollContent1 +  "     "  +  " - "  + " "  +  firstOptionResult + "%" );
                 
                     let poll_content2 = document.createElement('div');
                     poll_content2.classList.add('poll-content');
-                    let second_text_node = document.createTextNode(data.pollContent2 +  " "  +  " "  + " "  + secondOptionResult + "%");
+                    let second_text_node = document.createTextNode(data.pollContent2 +  " "  +  " - "  + " "  + secondOptionResult + "%");
                 
                     let poll_content3 = document.createElement('div');
                     poll_content3.classList.add('poll-content');
-                    let third_text_node = document.createTextNode(data.pollContent3 +  "     "   +  " "  + " "  + thirdOptionResult + "%");
+                    let third_text_node = document.createTextNode(data.pollContent3 +  "     "   +  " - "  + " "  + thirdOptionResult + "%");
                 
                     let poll_content4 = document.createElement('div');
                     poll_content4.classList.add('poll-content');
-                    let fourth_text_node = document.createTextNode(data.pollContent4 +  "     "   +  " "  + " "  + fourthOptionResult + "%");
+                    let fourth_text_node = document.createTextNode(data.pollContent4 +  "     "   +  " - "  + " "  + fourthOptionResult + "%");
 
                     let submit_button = document.createElement('button');
                     submit_button.setAttribute('type', 'submit');
@@ -249,9 +274,35 @@ let letMeDisplay = () => {
                     poll_content4.appendChild(fourth_radio);
                     poll_content4.appendChild(fourth_text_node);
                     poll_body.appendChild(poll_content4);
+
+                    let voterList = data.voters;
+                    const user = auth.currentUser;
+                    
+                    voterList.forEach( (voter) => {
+
+                      if (voter === user.uid) {
+
+                        submit_button.disabled = true;
+                        submit_button.classList.add('poll-submit-button-disabled');
+
+
+                      }
+
+
+                    })
+                    
                     poll_body.appendChild(submit_button);
                     
                     mainPolls.appendChild(poll_body);
+
+                    
+
+
+                   
+
+
+                   
+
 
                    
                     
@@ -294,35 +345,51 @@ document.addEventListener('click', async (event) => {
 
         if (forIndex === 0) {
           const updatedCount = data.pollContent1Vote + 1;
+          const user = auth.currentUser;
+          const theVoters = data.voters
+          theVoters.push(user.uid)
           await updateDoc(cityRef, {
 
-            pollContent1Vote: updatedCount
+            pollContent1Vote: updatedCount,
+            voters: theVoters
 
           });
         }
 
         if (forIndex === 1) {
           const updatedCount = data.pollContent2Vote + 1;
+          const user = auth.currentUser;
+          const theVoters = data.voters
+          theVoters.push(user.uid)
           await updateDoc(cityRef, {
 
-            pollContent2Vote: updatedCount
+            pollContent2Vote: updatedCount,
+            voters: theVoters
           });
         }
 
         if (forIndex === 2) {
           const updatedCount = data.pollContent3Vote + 1;
+          const user = auth.currentUser;
+          const theVoters = data.voters
+          theVoters.push(user.uid)
           await updateDoc(cityRef, {
 
-            pollContent3Vote: updatedCount
+            pollContent3Vote: updatedCount,
+            voters: theVoters
 
           });
         }
 
         if (forIndex === 3) {
           const updatedCount = data.pollContent4Vote + 1;
+          const user = auth.currentUser;
+          const theVoters = data.voters
+          theVoters.push(user.uid)
           await updateDoc(cityRef, {
 
-            pollContent4Vote: updatedCount
+            pollContent4Vote: updatedCount,
+            voters: theVoters
 
           });
         }

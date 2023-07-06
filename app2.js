@@ -1,7 +1,7 @@
 
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut  } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 
 
   const firebaseConfig = {
@@ -39,7 +39,7 @@
       const errorCode = error.code;
       const errorMessage = error.message;
       // ..
-      alert('Please Try Again')
+      alert('Error:' + errorMessage)
     });
 
 
@@ -53,6 +53,9 @@ const handleAuthStateChange = (user) => {
     if (user) {
       
       console.log('User is logged in:', user.email);
+
+      window.location.href = `./polls.html`;
+
     } else {
     
       console.log('User is logged out');
@@ -60,7 +63,4 @@ const handleAuthStateChange = (user) => {
   };
   
 
-  firebase.auth().onAuthStateChanged(handleAuthStateChange);
-
-
-
+onAuthStateChanged(auth, handleAuthStateChange);
