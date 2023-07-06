@@ -422,7 +422,7 @@ const handleAuthStateChange = (user) => {
 
     document.getElementById('mainpolls').innerHTML =`
     
-    <h1>Please Sign In to view the polls<h1>
+    <h1>Please Sign In to view and create polls<h1>
 
 
     <a href="./signin.html"><button id="notLoggedIn"> Go To Login Page </button></a>
@@ -431,6 +431,7 @@ const handleAuthStateChange = (user) => {
 
 
   }
+  document.getElementById('createPoll').disabled = true;
 };
 
 
